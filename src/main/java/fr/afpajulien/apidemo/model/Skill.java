@@ -18,12 +18,13 @@ import lombok.Data;
 @Table(name = "skills")
 public class Skill {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "skill")
-    private String skillRef;
+    private String skillName;
 
     @JsonIgnore
     @ManyToOne
