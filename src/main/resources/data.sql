@@ -12,7 +12,7 @@ INSERT INTO `person` VALUES
 (2,'Jane','Donuts','1980-05-14'),
 (3,'Bob','Tile','1965-04-25'),
 (4,'James','Bond','1945-03-15'),
-(5,'Bob','Tile','1965-04-25');
+(5,'Dan','George','1968-06-25');
 
 DROP TABLE IF EXISTS `skills` CASCADE;
 
