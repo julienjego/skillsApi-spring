@@ -7,12 +7,12 @@ CREATE TABLE `person` (
   `birth_date` date DEFAULT NULL
 );
 
-INSERT INTO `person` VALUES 
-(1,'John','Doe','1958-10-02'),
-(2,'Jane','Donuts','1980-05-14'),
-(3,'Bob','Tile','1965-04-25'),
-(4,'James','Bond','1945-03-15'),
-(5,'Dan','George','1968-06-25');
+INSERT INTO `person` (`first_name`, `last_name`, `birth_date`) VALUES 
+('John','Doe','1958-10-02'),
+('Jane','Donuts','1980-05-14'),
+('Bob','Tile','1965-04-25'),
+('James','Bond','1945-03-15'),
+('Dan','George','1968-06-25');
 
 DROP TABLE IF EXISTS `skills` CASCADE;
 
@@ -23,15 +23,15 @@ CREATE TABLE `skills` (
   CONSTRAINT `FK_personId` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`)
 );
 
-INSERT INTO `skills` VALUES 
-(1,'Java',1),
-(2,'Bootstrap',2),
-(3,'Node.js',3),
-(4,'JS',4),
-(5,'HTML',4),
-(6,'CSS',4),
-(7,'Python',5),
-(8,'MySQL',3),
-(9,'Postman',2),
-(10,'Maven',2);
+INSERT INTO `skills` (`skill`, `person_id`)VALUES 
+('Java',1),
+('Bootstrap',2),
+('Node.js',3),
+('JS',4),
+('HTML',4),
+('CSS',4),
+('Python',5),
+('MySQL',3),
+('Postman',2),
+('Maven',2);
 
