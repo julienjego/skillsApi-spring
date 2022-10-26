@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +33,14 @@ public class Person {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    // Paramêtre cascade pour persister les skills dans la BDD
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.PERSIST)
     private List<Skill> skills = new ArrayList<>();
+
+    // Méthode pour ajouter un skill à une personne, pas utilisée pour le moment
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.setPerson(this);
+    }
 
 }

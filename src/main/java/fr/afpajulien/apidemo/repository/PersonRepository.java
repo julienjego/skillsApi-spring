@@ -7,5 +7,4 @@ import fr.afpajulien.apidemo.model.Person;
 
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
-
 }

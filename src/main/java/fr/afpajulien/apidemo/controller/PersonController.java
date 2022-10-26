@@ -36,7 +36,14 @@ public class PersonController {
 
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-        return new ResponseEntity<>(psi.savePerson(person), CREATED);
+        // on boucle sur les skills et on lui assigne la personne en cours sinon NULL
+        person.getSkills().forEach(skill -> {
+            skill.setPerson(person);
+        });
+        ResponseEntity<Person> newPerson = new ResponseEntity<>(psi.savePerson(person), CREATED);
+        System.out.println(
+                "add " + person.getFirstName() + " / id: " + person.getId() + " / skills:" + person.getSkills());
+        return newPerson;
     }
 
     @DeleteMapping("/person/{id}")

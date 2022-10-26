@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -23,12 +24,13 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "skill")
+    @Column(name = "skill", unique = true)
     private String skillName;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "person_id")
+    @ToString.Exclude
     private Person person;
 
 }
