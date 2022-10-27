@@ -36,8 +36,11 @@ public class PersonController {
 
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-        // on boucle sur les skills et on lui assigne la personne en cours sinon NULL
-        person.getSkills().forEach(skill -> skill.setPerson(person));
+        // Si skills, on boucle sur les skills et on lui assigne la personne en cours
+        // sinon l'app retourne une erreur NULL
+        if (person.getSkills() != null) {
+            person.getSkills().forEach(skill -> skill.setPerson(person));
+        }
         return new ResponseEntity<>(psi.savePerson(person), CREATED);
     }
 

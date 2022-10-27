@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -31,6 +33,7 @@ public class Person {
     private String lastName;
 
     @Column(name = "birth_date")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")
     private Date birthDate;
 
     // Paramêtre cascade pour persister les skills dans la BDD
