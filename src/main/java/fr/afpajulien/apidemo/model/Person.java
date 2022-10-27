@@ -34,7 +34,7 @@ public class Person {
     private Date birthDate;
 
     // Paramêtre cascade pour persister les skills dans la BDD
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private List<Skill> skills = new ArrayList<>();
 
     // Méthode pour ajouter un skill à une personne, pas utilisée pour le moment
