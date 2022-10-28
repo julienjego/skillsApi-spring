@@ -2,6 +2,7 @@ package fr.afpajulien.apidemo.controller;
 
 import java.util.List;
 
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,11 +37,23 @@ public class PersonController {
 
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+        System.out.println("addperson");
+        System.out.println(person.getSkills());
         // Si skills, on boucle sur les skills et on lui assigne la personne en cours
         // sinon l'app retourne une erreur NULL
         if (person.getSkills() != null) {
-            person.getSkills().forEach(skill -> skill.setPerson(person));
+            // person.getSkills().forEach(skill -> skill.setPerson(person));
+            person.getSkills().forEach(skill -> {
+                if (!skill.getSkillName().isEmpty()) {
+                    skill.setPerson(person);
+                } else {
+                    person.getSkills().remove(skill);
+                }
+                // TODO fix items removal when empty
+                System.out.println(skill.getSkillName().length());
+            });
         }
+
         return new ResponseEntity<>(psi.savePerson(person), CREATED);
     }
 

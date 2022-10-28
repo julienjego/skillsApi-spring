@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `skills` CASCADE;
 
 CREATE TABLE `skills` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `skill` varchar(45) DEFAULT NULL UNIQUE,
+  `skill` varchar(45) DEFAULT NULL,
   `person_id` int NOT NULL,
   CONSTRAINT `FK_personId` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`)
 );
