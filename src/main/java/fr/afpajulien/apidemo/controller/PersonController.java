@@ -1,5 +1,6 @@
 package fr.afpajulien.apidemo.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.annotations.SourceType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.afpajulien.apidemo.model.Person;
+import fr.afpajulien.apidemo.model.Skill;
 import fr.afpajulien.apidemo.service.PersonServiceImpl;
 import static org.springframework.http.HttpStatus.*;
 
@@ -37,21 +39,20 @@ public class PersonController {
 
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-        System.out.println("addperson");
-        System.out.println(person.getSkills());
-        // Si skills, on boucle sur les skills et on lui assigne la personne en cours
-        // sinon l'app retourne une erreur NULL
-        if (person.getSkills() != null) {
-            // person.getSkills().forEach(skill -> skill.setPerson(person));
-            person.getSkills().forEach(skill -> {
-                if (!skill.getSkillName().isEmpty()) {
-                    skill.setPerson(person);
+        List<Skill> skills = person.getSkills();
+
+        // Si skills, on boucle sur les skills avec un Iterator pour un safe remove et
+        // on lui assigne la personne en cours sinon l'app retourne une erreur NULL
+
+        if (skills != null) {
+            for (Iterator<Skill> iterator = skills.iterator(); iterator.hasNext();) {
+                Skill s = iterator.next();
+                if (!s.getSkillName().isEmpty()) {
+                    s.setPerson(person);
                 } else {
-                    person.getSkills().remove(skill);
+                    iterator.remove();
                 }
-                // TODO fix items removal when empty
-                System.out.println(skill.getSkillName().length());
-            });
+            }
         }
 
         return new ResponseEntity<>(psi.savePerson(person), CREATED);
