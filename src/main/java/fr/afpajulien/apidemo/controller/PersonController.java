@@ -3,7 +3,6 @@ package fr.afpajulien.apidemo.controller;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
